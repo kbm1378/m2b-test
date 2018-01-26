@@ -1,6 +1,6 @@
 var baseApp;
 
-baseApp = angular.module("baseApp", ['ui.router']);
+baseApp = angular.module("baseApp", []);
 
 baseApp.config(function($interpolateProvider, $sceProvider, $httpProvider) {
   $interpolateProvider.startSymbol("{$");
