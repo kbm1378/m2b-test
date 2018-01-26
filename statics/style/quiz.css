@@ -19,9 +19,9 @@ body{
 
 .titleWrapper{
     width: 100%;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     background: #1a1c20;
     border-bottom: 1px solid rgba(255,255,255,0.12);
     color: white;
@@ -95,9 +95,9 @@ body{
     top: 0;
     height: 100%;
     background-color: rgba(0,0,0,0.25);
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
