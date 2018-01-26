@@ -52,6 +52,7 @@
              id="question--{$ $index+1 $}">
             <div class="question__cell"
                  ng-class="{'question__cell--oneline':quizQuestion.quizItemList.length<5,
+                            'question__cell--two':quizQuestion.quizItemList.length==2,
                             'question__cell--three':quizQuestion.quizItemList.length==3}"
                  ng-repeat="quizItem in quizQuestion.quizItemList"
                  ng-click="onClickQuizItem(quizQuestion, quizItem)">
