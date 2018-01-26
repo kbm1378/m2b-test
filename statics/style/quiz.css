@@ -6,6 +6,9 @@ body, h1, h2, h3, h4, h5, h6, p{
     font-weight: normal;
 }
 
+body{
+    background: #1a1c20;
+}
 
 
 .navbarCustom{
@@ -48,15 +51,40 @@ body, h1, h2, h3, h4, h5, h6, p{
 
 
 .question{
+    display: flex;
+    flex-wrap: wrap;
+}
 
+.question__cell{
+    flex-grow: 1;
+    width: 50%;
+}
+
+.question__cell--oneline{
+    flex-grow: 1;
+    width: 100%;
+}
+.question__cell--three{
+    flex-grow: 1;
+    width: 100%;
+    height: 33%
 }
 .question__imageWrapper{
-    height: 140px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     position: relative;
 }
+.question__imageWrapper--2{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
 .question__image{
     width: 100%;
+    height: 100%;
 }
 
 .question__textWrapper{

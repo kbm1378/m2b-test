@@ -35,59 +35,37 @@
             <img src="http://men2b.co/wp-content/uploads/2018/01/main_logo_3.png" width="68" height="28" alt="">
         </a>
     </nav>
-    <div class="titleWrapper">
-        <div class="titleWrapper__backWrapper">
-            <span class="oi oi-arrow-thick-left"></span>
-        </div>
-        <div class="titleWrapper__textWrapper">
-            <h1 class="titleWrapper__textTitle">1. 좋아하는 색은? </h1>
-            <p  class="titleWrapper__textHelper">향의 또 다른 언어는 이미지입니다. 색으로 나를 표현하는 것은 향으로 나를 표현하는 첫 단계입니다.</p>
-        </div>
-    </div>
-
-    <div class="question">
-        <div class="question__imageWrapper">
-            <img class="question__image"
-                 src="https://i.imgur.com/Fom4Hox.png">
-            <div class="question__textWrapper">
-                <span class="question__index">01</span>
-                <span class="question__choice">영업직{$ test $}</span>
+    <div ng-repeat="quizQuestion in quizQuestionList"
+         ng-show="user.step == quizQuestion.id">
+        <div class="titleWrapper">
+            <div class="titleWrapper__backWrapper"
+                 ng-show="quizQuestion.id > 1"
+                 ng-click="onClickBack(quizQuestion)">
+                <span class="oi oi-arrow-thick-left"></span>
+            </div>
+            <div class="titleWrapper__textWrapper">
+                <h1 class="titleWrapper__textTitle">{$ quizQuestion.title $}</h1>
+                <p  class="titleWrapper__textHelper">{$ quizQuestion.helper $}</p>
             </div>
         </div>
-        <div class="question__imageWrapper">
-            <img class="question__image"
-                 src="https://i.imgur.com/5jZG8wl.png">
-             <div class="question__textWrapper">
-                 <span class="question__index">02</span>
-                 <span class="question__choice">사무직</span>
-             </div>
-        </div>
-        <div class="question__imageWrapper">
-            <img class="question__image"
-                 src="https://i.imgur.com/ulXhQ9Y.png">
-             <div class="question__textWrapper">
-                 <span class="question__index">03</span>
-                 <span class="question__choice">연구직</span>
-             </div>
-        </div>
-        <div class="question__imageWrapper">
-            <img class="question__image"
-                 src="https://i.imgur.com/fqTKzX1.png">
-             <div class="question__textWrapper">
-                 <span class="question__index">04</span>
-                 <span class="question__choice">전문직</span>
-             </div>
-        </div>
-        <div class="question__imageWrapper">
-            <img class="question__image"
-                 src="https://i.imgur.com/I0qZZBF.png">
-             <div class="question__textWrapper">
-                 <span class="question__index">05</span>
-                 <span class="question__choice">사업가</span>
-             </div>
+        <div class="question"
+             id="question--{$ $index+1 $}">
+            <div class="question__cell"
+                 ng-class="{'question__cell--oneline':quizQuestion.quizItemList.length<5,
+                            'question__cell--three':quizQuestion.quizItemList.length==3}"
+                 ng-repeat="quizItem in quizQuestion.quizItemList"
+                 ng-click="onClickQuizItem(quizQuestion, quizItem)">
+                <div class="question__imageWrapper--2">
+                    <img class="question__image"
+                         src="{$ quizItem.imgUrl $}">
+                    <div class="question__textWrapper">
+                        <span class="question__index">0{$ quizItem.id $}</span>
+                        <span class="question__choice">{$ quizItem.name $}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
