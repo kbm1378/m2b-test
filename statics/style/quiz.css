@@ -1,0 +1,82 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body, h1, h2, h3, h4, h5, h6, p{
+    font-family: 'Noto Sans KR', sans-serif; !important
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
+
+.navbarCustom{
+    background: #1a1c20;
+    border-bottom: none;
+}
+
+
+.titleWrapper{
+    width: 100%;
+    display: inline-flex;
+    background: #1a1c20;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    color: white;
+    align-items: center
+}
+
+.titleWrapper__backWrapper{
+    width: 58px;
+    text-align: center;
+}
+
+
+.titleWrapper__textWrapper{
+    flex: 1;
+    padding: 10px 20px;
+}
+
+.titleWrapper__textTitle{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.titleWrapper__textHelper{
+    font-size: 10px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+
+.question{
+
+}
+.question__imageWrapper{
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+}
+.question__image{
+    width: 100%;
+}
+
+.question__textWrapper{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: rgba(0,0,0,0.25);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.question__index{
+    color: white;
+    font-weight: 300;
+    font-size: 30px
+
+}
+.question__choice{
+    color: white;
+    font-weight: 300;
+}
