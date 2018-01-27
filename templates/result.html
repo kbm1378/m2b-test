@@ -114,18 +114,18 @@
 
 
         <div id="detail_common"
-            ng-hide="user.perfumeSpecial=='E'">
+            ng-hide="user.perfumeCommon=='E'">
             <img class="result__image"
-                 ng-if="user.perfumeSpecial=='A'"
+                 ng-if="user.perfumeCommon=='A'"
                  src="https://i.imgur.com/vQPkFWp.png">
              <img class="result__image"
-                  ng-if="user.perfumeSpecial=='B'"
+                  ng-if="user.perfumeCommon=='B'"
                   src="https://i.imgur.com/rYVd6Hj.png">
               <img class="result__image"
-                   ng-if="user.perfumeSpecial=='C'"
+                   ng-if="user.perfumeCommon=='C'"
                    src="https://i.imgur.com/uac3pmV.png">
                <img class="result__image"
-                    ng-if="user.perfumeSpecial=='D'"
+                    ng-if="user.perfumeCommon=='D'"
                     src="https://i.imgur.com/yg8lDzX.png">
             <p class="result__detail"
                ng-bind-html="user.perfumeCommonReasonText">
