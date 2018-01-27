@@ -28,7 +28,7 @@ baseApp.controller("BaseCtrl", [
 
         $scope.resultInit = function() {
             $scope.isLoadingSubmit = true;
-            name_as_id = window.location.pathname.replace("/result/","");
+            name_as_id = window.location.pathname.replace("/","");
 
             $http({
                 method: 'GET',

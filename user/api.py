@@ -107,6 +107,7 @@ def get_result(request):
     data = {'result': 'fail'}
     request = body_to_querydict(request)
     name_as_id = request.GET.get('name_as_id')
+    print(name_as_id)
     users = User.objects.filter(name_as_id=name_as_id)
 
     if not users:
