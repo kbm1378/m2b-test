@@ -267,7 +267,7 @@ baseApp.controller("BaseCtrl", [
 
             $http({
                 method: 'POST',
-                url: '/user/submit',
+                url: '/user/api/submit',
                 data:  JSON.stringify(payload),
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'

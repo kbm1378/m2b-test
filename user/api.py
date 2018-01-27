@@ -108,3 +108,46 @@ def submit(request):
     data['page_id'] = user.name_as_id
     data['result'] = 'success'
     return JsonResponse(data)
+
+
+@require_http_methods(["GET"])
+def get_result(request):
+    data = {'result': 'fail'}
+    request = body_to_querydict(request)
+    name_as_id = request.GET.get('name_as_id')
+    users = User.objects.filter(name_as_id=name_as_id)
+
+    if not users:
+        data = {
+                'result': 'fail',
+                'error': 'User does not exist.'
+            }
+        return data, 404
+
+    user = users.first()
+
+    _RECOMMEND_TYPE_COMMON = 1
+    _RECOMMEND_TYPE_SPECIAL = 2
+
+    user_perfumes_common = UserPerfume.objects.filter(user = user,
+                                                     recommend_type = _RECOMMEND_TYPE_COMMON)
+    user_perfumes_special = UserPerfume.objects.filter(user = user,
+                                                     recommend_type = _RECOMMEND_TYPE_SPECIAL)
+
+    if not user_perfumes_common or not user_perfumes_special:
+        data = {
+                'result': 'fail',
+                'error': 'UserPerfumes does not exist.'
+            }
+        return data, 404
+
+    user_perfume_common = user_perfumes_common.first()
+    user_perfume_special = user_perfumes_special.first()
+
+
+
+    data['name'] = user.name
+    data['perfume_common'] = user_perfume_common.perfume.code
+    data['perfume_special'] = user_perfume_special.perfume.code
+    data['result'] = 'success'
+    return JsonResponse(data)

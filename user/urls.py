@@ -7,6 +7,7 @@ from .api import *
 
 
 urlpatterns = [
-    url(r'^submit$', submit, name='submit'),
+    url(r'^api/submit$', submit, name='submit'),
+    url(r'^api/get_result$', get_result, name='get_result'),
 
 ]
