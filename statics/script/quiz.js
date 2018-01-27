@@ -249,6 +249,10 @@ baseApp.controller("BaseCtrl", [
         };
 
         $scope.submit = function() {
+            if($scope.user[12].indexOf('quiz')!=-1){
+                alert("이 이름은 사용할 수 없습니다. 다른 이름을 입력해주세요.");
+                return;
+            }
             $scope.isLoadingSubmit = true;
 
             payload = {

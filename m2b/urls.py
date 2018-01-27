@@ -19,7 +19,7 @@ from .views import *
 
 urlpatterns = [
     url(r'^user/', include('user.urls', namespace='user')),
-    url(r'^quiz$', rendering_to_quiz, name='view_quiz'),
+    url(r'^quiz', rendering_to_quiz, name='view_quiz'),
     url(r'^admin/', admin.site.urls),
     url(r'^', rendering_to_result, name='view_result'),
 ]
