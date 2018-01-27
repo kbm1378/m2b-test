@@ -10,11 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 
-from perfume.helper import (
-    set_point_by_job, set_point_by_hobby_common, set_point_by_fashion_common,
-    set_point_by_holiday, set_point_by_hobby_special, set_point_by_fashion_special,
-    select_perfume_by_point
-)
+from perfume.helper import set_point_by_job, set_point_by_hobby_common, set_point_by_fashion_common, set_point_by_holiday, set_point_by_hobby_special, set_point_by_fashion_special, select_perfume_by_point
 
 
 def body_to_querydict(request):
