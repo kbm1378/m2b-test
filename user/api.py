@@ -9,7 +9,6 @@ from perfume.models import UserPerfume, Perfume
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from typing import Dict, List
 
 from perfume.helper import (
     set_point_by_job, set_point_by_hobby_common, set_point_by_fashion_common,
