@@ -19,14 +19,12 @@ User = (function() {
         this.name = data.name;
         this.perfumeCommon = data.perfume_common;
         this.perfumeSpecial = data.perfume_special;
-        this.perfumeCommonReasonText = data.perfume_common_reason_text;
-        this.perfumeSpecialReasonText = data.perfume_special_reason_text;
     }
     return User;
 })();
 
 baseApp.controller("BaseCtrl", [
-    "$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
+    "$scope", "$rootScope", "$http", "$sce", function($scope, $rootScope, $http, $sce) {
 
         $scope.resultInit = function() {
             $scope.isLoadingResult = true;
@@ -38,6 +36,8 @@ baseApp.controller("BaseCtrl", [
             }).then((function(response) {
                 data = response.data
                 $scope.user = new User(data);
+                $scope.user.perfumeCommonReasonText = $sce.trustAsHtml(data.perfume_common_reason_text);
+                $scope.user.perfumeSpecialReasonText = $sce.trustAsHtml(data.perfume_special_reason_text);
                 $scope.isLoadingResult = false;
 
                 setTimeout(function(){

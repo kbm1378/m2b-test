@@ -113,14 +113,22 @@
         </div>
 
 
-        <div id="detail_common">
-            <img class="result__image" src="https://i.imgur.com/kR8uE7T.png">
-            <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
-            <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
-            <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
-            <p class="result__detail">
-                {$ user.perfumeCommonReasonText $}
-
+        <div id="detail_common"
+            ng-hide="user.perfumeSpecial=='E'">
+            <img class="result__image"
+                 ng-if="user.perfumeSpecial=='A'"
+                 src="https://i.imgur.com/vQPkFWp.png">
+             <img class="result__image"
+                  ng-if="user.perfumeSpecial=='B'"
+                  src="https://i.imgur.com/rYVd6Hj.png">
+              <img class="result__image"
+                   ng-if="user.perfumeSpecial=='C'"
+                   src="https://i.imgur.com/uac3pmV.png">
+               <img class="result__image"
+                    ng-if="user.perfumeSpecial=='D'"
+                    src="https://i.imgur.com/yg8lDzX.png">
+            <p class="result__detail"
+               ng-bind-html="user.perfumeCommonReasonText">
             </p>
         </div>
 
@@ -132,11 +140,20 @@
                     ng-click="onScrollToOpenevent();">Open Event</button>
         </div>
 
-        <div id="detail_special">
-            <img class="result__image" src="https://i.imgur.com/1qK4cQ0.png">
-            <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
-            <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
-            <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
+        <div id="detail_special"
+             ng-hide="user.perfumeSpecial=='B'">
+            <img class="result__image"
+                 ng-if="user.perfumeSpecial=='A'"
+                 src="https://i.imgur.com/FWaOKQP.png">
+             <img class="result__image"
+                  ng-if="user.perfumeSpecial=='C'"
+                  src="https://i.imgur.com/1uLR4ha.png">
+              <img class="result__image"
+                   ng-if="user.perfumeSpecial=='D'"
+                   src="https://i.imgur.com/RQwjz4k.png">
+               <img class="result__image"
+                    ng-if="user.perfumeSpecial=='E'"
+                    src="https://i.imgur.com/1uvLMRY.png">
             <p class="result__detail">
                 {$ user.perfumeSpecialReasonText $}
             </p>
@@ -148,11 +165,12 @@
         </div>
 
         <img class="result__image" src="https://i.imgur.com/UUifsaH.png">
-        <img class="result__image" src="https://i.imgur.com/bWwwbMi.png">
+        <img class="result__image" src="https://i.imgur.com/DCQRsZW.png">
+        <img class="result__image" src="https://i.imgur.com/oeTJ3qc.png">
 
         <div id="detail_openevent">
-            <img class="result__image" src="https://i.imgur.com/OJ4YqhK.png">
-            <img class="result__image" src="https://i.imgur.com/ALw9Q4G.png">
+            <img class="result__image--reviewText" src="https://i.imgur.com/OJ4YqhK.png">
+            <img class="result__image--reviewWriter" src="https://i.imgur.com/ALw9Q4G.png">
         </div>
 
 

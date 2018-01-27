@@ -65,8 +65,8 @@ User = (function() {
         this[6] = null;
         this[7] = null;
         this[8] = null;
-        this[9] = 1; //향수
-        this[10] = ""; //성별
+        this[9] = 1; //성별
+        this[10] = ""; //향수
         this[11] = null; //나이
         this[12] = ""; //이름
     }
@@ -254,6 +254,12 @@ baseApp.controller("BaseCtrl", [
                 return;
             }
             $scope.isLoadingSubmit = true;
+            setTimeout(function(){
+                var typed = new Typed('#typed', {
+                    stringsElement: '#typed-strings',
+                    typeSpeed: 40
+                });
+            }, 100);
 
             payload = {
                 'color': $scope.user[1],
@@ -264,8 +270,8 @@ baseApp.controller("BaseCtrl", [
                 'introversion': $scope.user[6],
                 'heat': $scope.user[7],
                 'holiday': $scope.user[8],
-                'my_perfume':$scope.user[9],
-                'gender':$scope.user[10],
+                'gender':$scope.user[9],
+                'my_perfume':$scope.user[10],
                 'age':$scope.user[11],
                 'name':$scope.user[12]
             };
@@ -278,10 +284,10 @@ baseApp.controller("BaseCtrl", [
                     'Content-Type': 'application/json; charset=utf-8'
                 }
             }).then((function(response) {
-                reloadUrl = "/result/" + response.data.page_id;
+                reloadUrl = "/" + response.data.page_id;
                 setTimeout(function(){
                     window.location.href=reloadUrl;
-                }, 2000);
+                }, 3000);
             }));
         }
 

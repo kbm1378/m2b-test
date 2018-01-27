@@ -90,13 +90,13 @@ def submit(request):
     user_perfume_common = UserPerfume.objects.create(user = user,
                                                      perfume = perfume_common,
                                                      recommend_type = _RECOMMEND_TYPE_COMMON)
-    user_perfume_common.reason_text = ""
+    user_perfume_common.reason_text = generate_common_reason_text(user, user_perfume_common)
     user_perfume_common.save()
 
     user_perfume_special = UserPerfume.objects.create(user = user,
                                                      perfume = perfume_special,
                                                      recommend_type = _RECOMMEND_TYPE_SPECIAL)
-    user_perfume_special.reason_text = ""
+    user_perfume_special.reason_text = generate_common_reason_text(user, user_perfume_special)
     user_perfume_special.save()
 
 

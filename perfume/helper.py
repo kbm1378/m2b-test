@@ -252,3 +252,69 @@ def validate_repeat(result_common, result_special):
         elif result_common == "E":
             return "C"
     return "A"
+
+
+def generate_common_reason_text(user, user_perfume_common):
+    job = "<strong>" + user.get_job_display() + "</strong>"
+    fashion = "<strong>" + user.get_fashion_display() + "</strong>"
+    introversion = "<strong>" + user.get_introversion_display() + "</strong>"
+    perfume_code = user_perfume_common.perfume.code
+    reason_text = ""
+
+    if perfume_code == "A":
+        reason_text = """탑노트의 시트러스계열인 상큼한 버가못과 레몬이 당신의 기분을 전환시켜줍니다.
+        플로럴계열의 제라늄이 """ + job + """공간에서 부드럽고 여유있는 당신을 표현하고,
+        우디계열의 샌달우드와 시더우드가""" + fashion + """을 즐겨입는 감각적인 모습을 나타냅니다. 플로럴계열과 우디계열이 중심을 잡고 있는 이 향은 부드러우면서 밝은 분위기를 지닌 당신을 나타냅니다."""
+
+    elif perfume_code == "B":
+        reason_text = """버가못의 시트러스함이 당신의""" + introversion + """의 분위기를 친숙하게 만들어주고, 상쾌한 스파이시 느낌의 카다몬의 독특함이""" + fashion + """
+        을 선호하는 당신을 표현합니다. 허브를 닮은 장미 향, Geranium이 """ + job + """에 종사하는 당신에게 밝은 분위기를 심어주고, 핑크페퍼의 스파이시함이 득별한 느낌을 줍니다.
+        Tonkabean의 발삼한 따뜻한 느낌과 Vetiver가 만나 독특하지만 데일리로 사용하기 좋습니다."""
+
+    elif perfume_code == "C":
+        reason_text = """탑노트의 플로럴계열인 샤프란과 메이로즈가 """ + job + """에서 친근감있는 당신을 달콤하게 드러냅니다.
+        플로럴계열의 로즈페탈과 스파이시계열의 블랙페퍼가 독특하게 어우러져 """ + fashion + """을 즐겨입는 당신의 젠틀함을 나타내고, 우디계열의 샌달우드, 파츌리와 파우더리계열의 앰버가 어우러져 신중하면서도 여유있는 당신을 표현합니다.
+        플로럴 계열이 중심을 이루고 있는 이 향은 부드러운 모습이 매력적인 당신을 표현합니다."""
+
+    elif perfume_code == "D":
+        reason_text = """탑노트의 시트러스 계열인 버가못과 레몬이 당신의""" + introversion + """인 분위기를 친숙하게 다가오도록 하고, 상쾌한 솔잎 향기가 """ + fashion + """
+        을 즐겨입는 당신과 어울리며 파우더리한 Woody는 """ + job + """에 종사하는 당신에게 어울리는 신중함을 표현합니다."""
+
+    return reason_text
+
+
+
+
+
+def generate_special_reason_text(user, user_perfume_special):
+    job = "<strong>" + user.get_job_display() + "</strong>"
+    fashion = "<strong>" + user.get_fashion_display() + "</strong>"
+    introversion = "<strong>" + user.get_introversion_display() + "</strong>"
+    holiday = "<strong>" + user.get_holiday_display() + "</strong>"
+    hobby = "<strong>" + user.get_hobby_display() + "</strong>"
+    perfume_code = user_perfume_special.perfume.code
+    reason_text = ""
+
+    if perfume_code == "A":
+        reason_text = """탑노트의 시트러스 계열인 상큼한 버가못과 레몬이 """ + holiday + """를 즐기는 당신의 기분을 전환시켜,
+        허브를 닮은 장미향의 제라늄이 당신의 매력을 더욱 자신감 있게 표현합니다.
+        우디계열의 샌달우드와 시더우드가 """ + hobby + """를 즐기는 당신의 세련된 모습을 드러냅니다.
+        플로럴계열과 우디계열이 중심을 잡고 있는 이 향은 도회적인 당신의 중후한 매력을 부드럽게 부각시킵니다."""
+
+
+    elif perfume_code == "C":
+        reason_text = """탑노트의 플로럴계열인 샤프란과 메이로즈가 """ + holiday + """를 즐기는 당신을 감미롭게 나타내기 시작하여,
+        스파이시계열의 블랙페퍼와 플로럴계열의 로즈페탈이 어우러져 당신의 강렬한 열정을 드러냅니다.
+        우디계열의 샌달우드, 파츌리와 오리엔탈 계열의 앰버가 조화되어 """ + hobby + """을 즐기는 당신에게 은근한 섹시함을 느끼게 합니다.
+        플로럴 계열이 중심을 이루고 있는 이 향은 매혹적인 당신의 모습을 관능적으로 표현합니다."""
+
+
+    elif perfume_code == "D":
+        reason_text = """신선한 시트러스 Bergamot, Lemon으로 시작해 친숙하게 다가오도록 하고 상쾌하고 차분한 솔잎 향기가 """ + hobby + """의 성격과 어울리며
+        파우더리한 Woody가 """ + holiday + """에 어울리는 당신을 더욱 센스있게 표현해 줄 것입니다."""
+
+    elif perfume_code == "E":
+        reason_text =  holiday + """에 어울리는 바디는 Tuberose로 이성을 유혹하는 치명적이고 “위험한 관계”라는 꽃말과 같이 관능적이고 깊이 있는 플로럴함이 """ + hobby + """를 즐기는 당신에게 어울리는
+        YlangYlang을 만나 고급스러운 풍부함을 더해주고 잔향이 부드럽고 포근하게 느껴집니다."""
+
+    return reason_text
