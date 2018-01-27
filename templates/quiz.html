@@ -45,7 +45,8 @@
                      ng-click="onClickBack(quizQuestion)">
                     <span class="oi oi-arrow-thick-left"></span>
                 </div>
-                <div class="titleWrapper__textWrapper">
+                <div class="titleWrapper__textWrapper"
+                     ng-class="{'titleWrapper__textWrapper--withoutArrow': quizQuestion.id == quizQuestionList[0].id}">
                     <h1 class="titleWrapper__textTitle">{$ quizQuestion.title $}</h1>
                     <p  class="titleWrapper__textHelper">{$ quizQuestion.helper $}</p>
                 </div>

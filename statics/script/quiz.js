@@ -211,7 +211,7 @@ baseApp.controller("BaseCtrl", [
             12,
             "text",
             '12. 이름',
-            '마지막으로 어떤 분의 향을 찾아야할지 당신의 이름을 알려주세요. 입력하신 이름을 향수 병에 넣으실 수 있습니다.',
+            '마지막으로, 어떤 분의 향을 찾아야할지 알려주세요. 입력하신 이름은 향수 병에 넣을 수 있습니다.',
             'ex) 김투비'
         ));
 
@@ -221,7 +221,13 @@ baseApp.controller("BaseCtrl", [
         }, 100);
 
         $scope.onClickBack = function(quizQuestion) {
-            $scope.user.step = quizQuestion.id - 1;
+             beforeStep = quizQuestion.id - 1;
+             if ($scope.quizQuestionList[beforeStep-1].type == "radio"){
+                 setTimeout(function(){
+                     $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
+                 }, 50);
+             }
+             $scope.user.step = beforeStep
         }
 
         $scope.onClickQuizItem = function(quizQuestion, quizItem) {

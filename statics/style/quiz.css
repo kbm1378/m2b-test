@@ -36,11 +36,19 @@ body{
 }
 
 
+
 .titleWrapper__textWrapper{
     flex: 1;
-    padding: 10px 20px;
     height: 88px;
+    padding: 10px 20px 10px 0;
 }
+
+.titleWrapper__textWrapper--withoutArrow{
+    flex: 1;
+    height: 88px;
+    padding: 10px 20px;
+}
+
 
 .titleWrapper__textTitle{
     font-size: 18px;
@@ -123,7 +131,7 @@ body{
     position: absolute;
     top: 0;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -198,7 +206,7 @@ body{
 }
 
 .quizQuestionList {
-    max-width: 700px;
+    max-width: 740px;
     margin: 0 auto;
     display: block;
 }
@@ -227,6 +235,11 @@ body{
     font-size: 12px;
     text-decoration: underline;
     margin-top: 10px;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 
