@@ -214,7 +214,7 @@ body{
     border: 2px solid white;
     background-color: #1a1c20;
     outline: none !important;
-    margin-top: 200px;
+    margin-top: 20px;
 }
 .question__button:disabled{
     opacity: 0.2;
