@@ -3,7 +3,7 @@ from django.contrib import admin, messages
 
 from .models import User
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(ImportExportActionModelAdmin):
     list_display = ('name', 'gender', 'age', 'color', 'job', 'hobby', 'food', 'fashion', 'introversion', 'heat', 'holiday', 'my_perfume', 'created_at')
     list_filter = ('created_at', 'gender', )
     date_hierarchy = 'created_at'
