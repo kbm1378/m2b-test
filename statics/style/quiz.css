@@ -229,6 +229,16 @@ body{
     height: 30vh;
     position: relative;
 }
+.loader::before{
+    position: absolute;
+    content: '당신에게 가장 잘 어울리는 향수를 분석하고 있습니다.';
+    color: white;
+    font-weight: 300;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+}
 .ball-scale-multiple {
     position: absolute;
     top: 48%;
