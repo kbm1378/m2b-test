@@ -273,7 +273,10 @@ baseApp.controller("BaseCtrl", [
                     'Content-Type': 'application/json; charset=utf-8'
                 }
             }).then((function(response) {
-                return console.log("hi");
+                reloadUrl = "/result/" + response.data.page_id;
+                window.location.href=reloadUrl
+                console.log(reloadUrl);
+                //location.reload(reloadUrl);
             }));
         }
 

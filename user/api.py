@@ -5,8 +5,18 @@ from django.views.decorators.http import require_http_methods
 import json
 from django.http.request import QueryDict
 from user.models import User
+from perfume.models import UserPerfume, Perfume
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from typing import Dict, List
+
+from perfume.helper import (
+    set_point_by_job, set_point_by_hobby_common, set_point_by_fashion_common,
+    set_point_by_holiday, set_point_by_hobby_special, set_point_by_fashion_special,
+    select_perfume_by_point
+)
+
 
 def body_to_querydict(request):
     if 'application/json' in request.META['CONTENT_TYPE']:
@@ -27,6 +37,7 @@ def body_to_querydict(request):
             request.POST = q_data
         return request
     return request
+
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -59,8 +70,41 @@ def submit(request):
         user.age = int(request.POST.get('age'))
     if request.POST.get('name'):
         user.name = request.POST.get('name')
+
+    same_name_count = User.objects.filter(name=user.name).count()
+    if same_name_count > 0:
+        user.name_as_id = user.name + str(same_name_count+1)
+    else:
+        user.name_as_id = user.name
     user.save()
 
+    point_dic_common = {'A':0,'B':0,'C':0,'D':0,'E':0}
+    point_dic_special = {'A':0,'B':0,'C':0,'D':0,'E':0}
 
+    point_dic_common = set_point_by_job(user, point_dic_common)
+    point_dic_common = set_point_by_hobby_common(user, point_dic_common)
+    point_dic_common = set_point_by_fashion_common(user, point_dic_common)
+    result_common = select_perfume_by_point(point_dic_common)
+    point_dic_special = set_point_by_holiday(user, point_dic_special)
+    point_dic_special = set_point_by_hobby_special(user, point_dic_special)
+    point_dic_special = set_point_by_fashion_special(user, point_dic_special)
+    result_special = select_perfume_by_point(point_dic_special)
+    result_special = validate_repeat(result_common, result_special)
+
+    perfume_common = Perfume.objects.get(code=result_common)
+    perfume_special =  Perfume.objects.get(code=result_special)
+    _RECOMMEND_TYPE_COMMON = 1
+    _RECOMMEND_TYPE_SPECIAL = 2
+    user_perfume_common = UserPerfume.objects.create(user = user,
+                                                     perfume = perfume_common,
+                                                     recommend_type = _RECOMMEND_TYPE_COMMON)
+    user_perfume_special = UserPerfume.objects.create(user = user,
+                                                     perfume = perfume_special,
+                                                     recommend_type = _RECOMMEND_TYPE_SPECIAL)
+
+
+
+
+    data['page_id'] = user.name_as_id
     data['result'] = 'success'
     return JsonResponse(data)

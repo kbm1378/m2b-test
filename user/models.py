@@ -95,3 +95,7 @@ class User(models.Model):
     gender = models.IntegerField(choices=_GENDER, blank=True, null=True, verbose_name='성별')
     comment = models.TextField(verbose_name='기타 문의사항')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일')
+    name_as_id = models.CharField(max_length=100, verbose_name='아이디로 사용하기 위한 이름')
+
+    def __str__(self):
+        return self.name_as_id

@@ -15,6 +15,9 @@ class Perfume(models.Model):
     imageurl_2_special = models.URLField(max_length=500, null=True, blank=True, verbose_name='Special일 경우 2번째 이미지 url')
     imageurl_3_special = models.URLField(max_length=500, null=True, blank=True, verbose_name='Special일 경우 3번째 이미지 url')
 
+    def __str__(self):
+        return self.code
+
 class PerfumeComment(models.Model):
     perfume =  models.ForeignKey(Perfume, on_delete=models.CASCADE, verbose_name='추천 향수')
     reason_paragraph = models.TextField(verbose_name='향수 추천 문구') # ~에 맞는 달콤하면서도 깔끔한 첫인상을 주는 Saffron과 Mayrose가 있는 향입니다.
