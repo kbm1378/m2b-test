@@ -168,8 +168,8 @@ baseApp.controller("BaseCtrl", [
             '땀에 포함된 화학성분은 향에 큰 영향을 미칩니다. 높은 체온을 가진 사람일수록 향수가 더욱 빨리 날아갑니다.',
             [
                 new QuizItem(1, '차가운 편', 'https://i.imgur.com/nNRucDr.png'),
-                new QuizItem(2, '보통', 'https://i.imgur.com/kaCC15M.png'),
-                new QuizItem(3, '뜨거운 편', 'https://i.imgur.com/7WYi3gu.png')
+                new QuizItem(2, '보통', 'https://i.imgur.com/7WYi3gu.png'),
+                new QuizItem(3, '뜨거운 편', 'https://i.imgur.com/kaCC15M.png')
             ]
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
@@ -275,9 +275,9 @@ baseApp.controller("BaseCtrl", [
                 }
             }).then((function(response) {
                 reloadUrl = "/result/" + response.data.page_id;
-                window.location.href=reloadUrl
-                console.log(reloadUrl);
-                //location.reload(reloadUrl);
+                setTimeout(function(){
+                    window.location.href=reloadUrl;
+                }, 2000);
             }));
         }
 
