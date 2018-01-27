@@ -19,6 +19,8 @@ User = (function() {
         this.name = data.name;
         this.perfumeCommon = data.perfume_common;
         this.perfumeSpecial = data.perfume_special;
+        this.perfumeCommonReasonText = data.perfume_common_reason_text;
+        this.perfumeSpecialReasonText = data.perfume_special_reason_text;
     }
     return User;
 })();
@@ -37,6 +39,13 @@ baseApp.controller("BaseCtrl", [
                 data = response.data
                 $scope.user = new User(data);
                 $scope.isLoadingResult = false;
+
+                setTimeout(function(){
+                    var typed = new Typed('#typed', {
+                        stringsElement: '#typed-strings',
+                        typeSpeed: 40
+                    });
+                }, 100);
             }));
         }
 
@@ -55,6 +64,7 @@ baseApp.controller("BaseCtrl", [
         $scope.onReload = function(url){
             window.location.href=url;
         }
+
 
 
 

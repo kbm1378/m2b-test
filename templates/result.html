@@ -31,12 +31,12 @@
 <body ng-cloak ng-app="baseApp" ng-controller="BaseCtrl" md-no-ink ng-init="resultInit();">
     <!-- Just an image -->
     <nav class="navbar navbar-light navbarCustom">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="http://men2b.co/">
             <img src="https://i.imgur.com/BHVcIJF.png" width="68" height="28" alt="">
         </a>
     </nav>
     <div class="loader"
-         ng-if="isLoadingResult">
+         ng-show="isLoadingResult">
         <div class="ball-scale-multiple">
             <div></div>
             <div></div>
@@ -44,14 +44,15 @@
         </div>
     </div>
     <div id="resultWrapper"
-        ng-if="!isLoadingResult">
-
-
-
-
-        {$ user.name $}
-        {$ user.perfumeCommon $}
-        {$ user.perfumeSpecial $}
+        ng-show="!isLoadingResult">
+        <div class="result__header">
+            <div id="typed-strings">
+                <p>{$ user.name $}님께 어울리는 2가지 향을 찾았습니다.</p>
+                <p>{$ user.name $}님께 어울리는 2가지 향을 찾았습니다.</p>
+                <p>{$ user.name $}님께 어울리는 2가지 향을 찾았습니다.</p>
+            </div>
+            <span id="typed"></span>
+        </div>
 
 
 
@@ -68,11 +69,17 @@
             <img class="result__image--half"
                  ng-if="user.perfumeCommon=='D'"
                  src="https://i.imgur.com/7XaytGG.png">
+            <div class="result__image--half"
+                 ng-if="user.perfumeCommon=='E'">
+            </div>
 
 
          <img class="result__image--half"
               ng-if="user.perfumeSpecial=='A'"
               src="https://i.imgur.com/9ApFJ3s.png">
+          <div class="result__image--half"
+               ng-if="user.perfumeSpecial=='B'">
+          </div>
           <img class="result__image--half"
                ng-if="user.perfumeSpecial=='C'"
                src="https://i.imgur.com/uNctczY.png">
@@ -111,6 +118,10 @@
             <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
             <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
             <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
+            <p class="result__detail">
+                {$ user.perfumeCommonReasonText $}
+
+            </p>
         </div>
 
 
@@ -126,6 +137,9 @@
             <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
             <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
             <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
+            <p class="result__detail">
+                {$ user.perfumeSpecialReasonText $}
+            </p>
         </div>
 
         <div class="result__buttonsWrapper--one">
@@ -170,6 +184,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/static/script/typed.min.js"></script>
     <script type="text/javascript" src="/static/script/result.js"></script>
 </body>
 </html>

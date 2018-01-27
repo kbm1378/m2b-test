@@ -13,7 +13,8 @@ class PerfumeAdmin(ImportExportActionModelAdmin):
     list_display = ('code', 'tagtext')
 
 class UserPerfumeAdmin(ImportExportActionModelAdmin):
-    list_display = ('user', 'perfume', 'recommend_type', 'created_at')
+    list_display = ('user', 'perfume', 'recommend_type', 'reason_text', 'created_at')
+    list_editable = ('reason_text', )
     date_hierarchy = 'created_at'
 
 admin.site.register(Perfume, PerfumeAdmin)

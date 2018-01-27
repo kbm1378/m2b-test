@@ -90,11 +90,14 @@ def submit(request):
     user_perfume_common = UserPerfume.objects.create(user = user,
                                                      perfume = perfume_common,
                                                      recommend_type = _RECOMMEND_TYPE_COMMON)
+    user_perfume_common.reason_text = ""
+    user_perfume_common.save()
+
     user_perfume_special = UserPerfume.objects.create(user = user,
                                                      perfume = perfume_special,
                                                      recommend_type = _RECOMMEND_TYPE_SPECIAL)
-
-
+    user_perfume_special.reason_text = ""
+    user_perfume_special.save()
 
 
     data['page_id'] = user.name_as_id
@@ -107,7 +110,6 @@ def get_result(request):
     data = {'result': 'fail'}
     request = body_to_querydict(request)
     name_as_id = request.GET.get('name_as_id')
-    print(name_as_id)
     users = User.objects.filter(name_as_id=name_as_id)
 
     if not users:
@@ -137,10 +139,10 @@ def get_result(request):
     user_perfume_common = user_perfumes_common.first()
     user_perfume_special = user_perfumes_special.first()
 
-
-
     data['name'] = user.name
     data['perfume_common'] = user_perfume_common.perfume.code
     data['perfume_special'] = user_perfume_special.perfume.code
+    data['perfume_common_reason_text'] = user_perfume_common.reason_text
+    data['perfume_special_reason_text'] = user_perfume_special.reason_text
     data['result'] = 'success'
     return JsonResponse(data)

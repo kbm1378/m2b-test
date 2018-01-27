@@ -41,6 +41,14 @@ body{
     display: block;
 }
 
+
+.result__header{
+    font-size: 20px;
+    padding: 20px;
+    font-weight: 200;
+    line-height: 1.6;
+}
+
 .result__image{
     width: 100%;
 }
@@ -51,6 +59,13 @@ body{
 .result__image--half{
     width: 49.5%;
     display: inline-block;
+}
+
+.result__detail{
+    font-size: 14px;
+    padding: 20px;
+    font-weight: 200;
+    line-height: 1.6;
 }
 
 .result__buttonsWrapper{
