@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'perfume',
+    'import_export',
 ]
 
 MIDDLEWARE = [
