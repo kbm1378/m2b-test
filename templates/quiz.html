@@ -35,41 +35,75 @@
             <img src="http://men2b.co/wp-content/uploads/2018/01/main_logo_3.png" width="68" height="28" alt="">
         </a>
     </nav>
-    <div ng-repeat="quizQuestion in quizQuestionList"
-         ng-show="user.step == quizQuestion.id">
-        <div class="titleWrapper">
-            <div class="titleWrapper__backWrapper"
-                 ng-show="quizQuestion.id > 1"
-                 ng-click="onClickBack(quizQuestion)">
-                <span class="oi oi-arrow-thick-left"></span>
+    <div id="quizWrapper">
+        <div class="quizQuestionList"
+             ng-hide="isLoadingSubmit"
+             ng-repeat="quizQuestion in quizQuestionList"
+             ng-show="user.step == quizQuestion.id">
+            <div class="titleWrapper">
+                <div class="titleWrapper__backWrapper"
+                     ng-show="quizQuestion.id > 1"
+                     ng-click="onClickBack(quizQuestion)">
+                    <span class="oi oi-arrow-thick-left"></span>
+                </div>
+                <div class="titleWrapper__textWrapper">
+                    <h1 class="titleWrapper__textTitle">{$ quizQuestion.title $}</h1>
+                    <p  class="titleWrapper__textHelper">{$ quizQuestion.helper $}</p>
+                </div>
             </div>
-            <div class="titleWrapper__textWrapper">
-                <h1 class="titleWrapper__textTitle">{$ quizQuestion.title $}</h1>
-                <p  class="titleWrapper__textHelper">{$ quizQuestion.helper $}</p>
-            </div>
-        </div>
-        <div class="question"
-             id="question--{$ $index+1 $}">
-            <div class="question__cell"
-                 ng-class="{'question__cell--oneline':quizQuestion.quizItemList.length<5,
-                            'question__cell--two':quizQuestion.quizItemList.length==2,
-                            'question__cell--three':quizQuestion.quizItemList.length==3}"
-                 ng-repeat="quizItem in quizQuestion.quizItemList"
-                 ng-click="onClickQuizItem(quizQuestion, quizItem)">
-                <div class="question__imageWrapper--2">
-                    <img class="question__image"
-                         src="{$ quizItem.imgUrl $}">
-                    <div class="question__textWrapper">
-                        <span class="question__index">0{$ quizItem.id $}</span>
-                        <span class="question__choice">{$ quizItem.name $}</span>
+
+            <div class="question"
+                 ng-if="quizQuestion.type == 'radio'"
+                 id="question--{$ $index+1 $}">
+                <div class="question__cell"
+                     ng-class="{'question__cell--oneline':quizQuestion.quizItemList.length<5,
+                                'question__cell--two':quizQuestion.quizItemList.length==2,
+                                'question__cell--three':quizQuestion.quizItemList.length==3}"
+                     ng-repeat="quizItem in quizQuestion.quizItemList"
+                     ng-click="onClickQuizItem(quizQuestion, quizItem)">
+                    <div class="question__imageWrapper--2">
+                        <img class="question__image"
+                             src="{$ quizItem.imgUrl $}">
+                        <div class="question__textWrapper">
+                            <div class="question__indexWrapper">
+                                <span class="question__index" ng-show="quizItem.id!=0">{$ quizItem.id $}</span>
+                            </div>
+
+                            <span class="question__choice">{$ quizItem.name $}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="question--input"
+                 ng-if="quizQuestion.type=='text'"
+                 id="question--{$ $index+1 $}">
+                 <input type="text"
+                        class="question__input"
+                        placeholder="ex) CK ONE, 존 바바토스, 앤디미온"
+                        ng-model="user.myPerfume">
+
+                <button class="question__button--submit"
+                        ng-click="onClickQuizItem(quizQuestion, null);">
+                     나에기 어울리는 향수 결과 보기
+                 </button>
+            </div>
+
         </div>
+
+        <div class="loader"
+             ng-if="isLoadingSubmit">
+            <div class="ball-scale-multiple">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>

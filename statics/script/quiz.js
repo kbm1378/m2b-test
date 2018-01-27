@@ -7,10 +7,18 @@ baseApp.config(function($interpolateProvider, $sceProvider, $httpProvider) {
   return $interpolateProvider.endSymbol("$}");
 });
 
+baseApp.config([
+  '$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+  }
+]);
+
 
 QuizQuestion = (function() {
-    function QuizQuestion(id, title, helper, quiz_item_list) {
+    function QuizQuestion(id, type, title, helper, quiz_item_list) {
         this.id = id;
+        this.type = type;
         this.title = title;
         this.helper = helper;
         this.quizItemList = quiz_item_list
@@ -30,7 +38,20 @@ QuizItem = (function() {
 User = (function() {
     function User() {
         this.step = 1;
-        this.color = null;
+        this[1] = null;
+        this[2] = null;
+        this[3] = null;
+        this[4] = null;
+        this[5] = null;
+        this[6] = null;
+        this[7] = null;
+        this[8] = null;
+        this.myPerfume = "";
+        this.channel = null;
+        this.name = "";
+        this.age = null;
+        this.gender = 1;
+        this.comment = "";
     }
     return User;
 })();
@@ -39,23 +60,29 @@ User = (function() {
 
 baseApp.controller("BaseCtrl", [
     "$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
-        $scope.user = new User()
+        $scope.user = new User();
+        console.log($scope.user);
         $scope.quizQuestionList = [];
+        $scope.state = {
+            'isLoading': false
+        };
         $scope.quizQuestionList.push(new QuizQuestion(
             1,
+            "radio",
             '1. 좋아하는 색은?',
             '향의 또 다른 언어는 이미지입니다. 색으로 나를 표현하는 것은 향으로 나를 표현하는 첫 단계입니다.',
             [
-                new QuizItem(1, '빨강', 'https://i.imgur.com/Fom4Hox.png'),
-                new QuizItem(2, '노랑', 'https://i.imgur.com/5jZG8wl.png'),
-                new QuizItem(3, '초록', 'https://i.imgur.com/ulXhQ9Y.png'),
-                new QuizItem(4, '파랑', 'https://i.imgur.com/fqTKzX1.png'),
-                new QuizItem(5, '검정', 'https://i.imgur.com/I0qZZBF.png'),
-                new QuizItem(6, '흰색', 'https://i.imgur.com/I0qZZBF.png')
+                new QuizItem(1, '빨강', 'https://i.imgur.com/gbMEtRN.jpg'),
+                new QuizItem(2, '노랑', 'https://i.imgur.com/N8l6Rbw.jpg'),
+                new QuizItem(3, '초록', 'https://i.imgur.com/uWMBWys.jpg'),
+                new QuizItem(4, '파랑', 'https://i.imgur.com/k7JBfoV.jpg'),
+                new QuizItem(5, '검정', 'https://i.imgur.com/G9CnmVB.jpg'),
+                new QuizItem(6, '흰색', '')
             ]
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             2,
+            "radio",
             '2. 다니고 있는 직장은?',
             '수는 개인적인 아이템이 아니라 당신 주변의 사람과 공유하는 아이템입니다.',
             [
@@ -69,6 +96,7 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             3,
+            "radio",
             '3. 가지고 있는 취미는?',
             '취미의 환경에 적합한 향수를 추천해드립니다.',
             [
@@ -78,6 +106,7 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             4,
+            "radio",
             '4. 좋아하는 음식의 분류는?',
             '고지방 음식을 좋아하는 사람은 피부의 유분으로 인해 강하고 오래가는 향이 어울립니다.',
             [
@@ -88,10 +117,11 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             5,
+            "radio",
             '5. 자주 입는 패션 스타일은?',
             '패션 스타일은 향수의 선호도를 파악하는 좋은 지표입니다.',
             [
-                new QuizItem(0, '선택해주세요', ''),
+                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png'),
                 new QuizItem(1, '하이패션', 'https://i.imgur.com/HCDqDah.jpg'),
                 new QuizItem(2, '캐주얼', 'https://i.imgur.com/nhW9pp2.jpg'),
                 new QuizItem(3, '프레피', 'https://i.imgur.com/IPnXqdG.jpg'),
@@ -101,10 +131,11 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             6,
+            "radio",
             '6. 주로 나타나는 성격은?',
             '연구에 의하면 성격은 환경에 대한 자극을 반영합니다. 내향적인 사람일수록 더욱 따뜻하고, 복잡한 향을 선호합니다.',
             [
-                new QuizItem(0, '선택해주세요', ''),
+                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png'),
                 new QuizItem(1, '매우 외향적', 'https://i.imgur.com/Fom4Hox.png'),
                 new QuizItem(2, '외향적', 'https://i.imgur.com/5jZG8wl.png'),
                 new QuizItem(3, '보통', 'https://i.imgur.com/ulXhQ9Y.png'),
@@ -114,6 +145,7 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             7,
+            "radio",
             '7. 몸에 열이 나는 정도는?',
             '땀에 포함된 화학성분은 향수의 밸런스와 향에 큰 영향을 미칩니다. 높은 체온을 가진 사람일수록 향수가 더욱 빨리 날아갑니다.',
             [
@@ -124,6 +156,7 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             8,
+            "radio",
             '8. 시간의 여유가 있을때 주로 무엇을?',
             '당신의 라이프를 즐기는 곳은 얼마나 붐빕니까? 향은 당신 앞에 있는 사람과 함께하는 것입니다.',
             [
@@ -134,14 +167,22 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             9,
+            "text",
             '9. 현재 내가 가지고 있는 향수는?',
             '현재 사용하고 있는 향수는 현재 내가 이런 향에 호감을 갖고 있구나라는 것을 알 수 있습니다. 향수를 아직 사용하고 있지 않으시면 "없음"이라고 적어주셔도 됩니다.',
             []
         ));
+        $scope.quizQuestionList.push(new QuizQuestion(
+            10,
+            "text",
+            '감사합니다.',
+            '고생하셨습니다.',
+            []
+        ));
+
 
         setTimeout(function(){
-            $("#question--" + String(1)).css("height", document.documentElement.clientHeight - 131);
-
+            $("#question--1").css("height", document.documentElement.clientHeight - 146);
         }, 100);
 
         $scope.onClickBack = function(quizQuestion) {
@@ -150,14 +191,45 @@ baseApp.controller("BaseCtrl", [
         }
 
         $scope.onClickQuizItem = function(quizQuestion, quizItem) {
-            $scope.user.color = quizItem.id;
+
             $scope.user.step = quizQuestion.id + 1;
+            if (quizItem!=null){
+                if (quizItem.id == 0){
+                    return;
+                }
+                $scope.user[quizQuestion.id] = quizItem.id;
+            }
             setTimeout(function(){
                 $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
-            }, 100);
-
-            console.log($scope.user);
+            }, 50);
         };
+
+        $scope.submit = function() {
+            $scope.isLoadingSubmit = true;
+
+            payload = {
+                'color': $scope.user[1],
+                'job': $scope.user[2],
+                'hobby': $scope.user[3],
+                'food': $scope.user[4],
+                'fashion': $scope.user[5],
+                'introversion': $scope.user[6],
+                'heat': $scope.user[7],
+                'holiday': $scope.user[8],
+                'my_perfume':$scope.user.myPerfume
+            };
+
+            $http({
+                method: 'POST',
+                url: '/user/submit',
+                data:  JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }).then((function(response) {
+                return console.log("hi");
+            }));
+        }
 
 
         // 1번만 뜬다.
