@@ -28,29 +28,138 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="/static/style/result.css"/>
 </head>
-<body ng-cloak ng-app="baseApp" ng-controller="BaseCtrl" md-no-ink>
+<body ng-cloak ng-app="baseApp" ng-controller="BaseCtrl" md-no-ink ng-init="resultInit();">
     <!-- Just an image -->
     <nav class="navbar navbar-light navbarCustom">
         <a class="navbar-brand" href="#">
             <img src="https://i.imgur.com/BHVcIJF.png" width="68" height="28" alt="">
         </a>
     </nav>
-    <div id="resultWrapper"
-         ng-init="resultInit();">
-
-
-        <div class="loader"
-             ng-if="isLoadingSubmit">
-            <div class="ball-scale-multiple">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+    <div class="loader"
+         ng-if="isLoadingResult">
+        <div class="ball-scale-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
+    </div>
+    <div id="resultWrapper"
+        ng-if="!isLoadingResult">
+
+
+
 
         {$ user.name $}
         {$ user.perfumeCommon $}
         {$ user.perfumeSpecial $}
+
+
+
+        <div class="result__imageWrapper">
+            <img class="result__image--half"
+                 ng-if="user.perfumeCommon=='A'"
+                 src="https://i.imgur.com/kewHCgO.png">
+            <img class="result__image--half"
+                 ng-if="user.perfumeCommon=='B'"
+                 src="https://i.imgur.com/1T794XD.png">
+            <img class="result__image--half"
+                 ng-if="user.perfumeCommon=='C'"
+                 src="https://i.imgur.com/52lXsZt.png">
+            <img class="result__image--half"
+                 ng-if="user.perfumeCommon=='D'"
+                 src="https://i.imgur.com/7XaytGG.png">
+
+
+         <img class="result__image--half"
+              ng-if="user.perfumeSpecial=='A'"
+              src="https://i.imgur.com/9ApFJ3s.png">
+          <img class="result__image--half"
+               ng-if="user.perfumeSpecial=='C'"
+               src="https://i.imgur.com/uNctczY.png">
+           <img class="result__image--half"
+                ng-if="user.perfumeSpecial=='D'"
+                src="https://i.imgur.com/GzHLZh9.png">
+            <img class="result__image--half"
+                 ng-if="user.perfumeSpecial=='E'"
+                 src="https://i.imgur.com/p77oKEc.png">
+
+        </div>
+        <div class="result__buttonsWrapper">
+            <div class="result__buttonWrapper">
+                <button class="result__button"
+                        ng-click="onScrollToCommon();">더 알아보기</button>
+            </div>
+            <div class="result__buttonWrapper">
+                <button class="result__button"
+                        ng-click="onScrollToSpecial();">더 알아보기</button>
+            </div>
+        </div>
+
+
+
+        <img class="result__image" src="https://i.imgur.com/OJ4YqhK.png">
+        <img class="result__image" src="https://i.imgur.com/6z0T9by.png">
+
+        <div class="result__buttonsWrapper--one">
+            <button class="result__button"
+                    ng-click="onScrollToOpenevent();">Open Event</button>
+        </div>
+
+
+        <div id="detail_common">
+            <img class="result__image" src="https://i.imgur.com/kR8uE7T.png">
+            <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
+            <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
+            <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
+        </div>
+
+
+
+
+        <div class="result__buttonsWrapper--one">
+            <button class="result__button"
+                    ng-click="onScrollToOpenevent();">Open Event</button>
+        </div>
+
+        <div id="detail_special">
+            <img class="result__image" src="https://i.imgur.com/1qK4cQ0.png">
+            <img class="result__image" src="https://i.imgur.com/NikVBKm.png">
+            <img class="result__image" src="https://i.imgur.com/ob1x2b9.png">
+            <img class="result__image" src="https://i.imgur.com/uzI1SMt.png">
+        </div>
+
+        <div class="result__buttonsWrapper--one">
+            <button class="result__button"
+                    ng-click="onScrollToOpenevent();">Open Event</button>
+        </div>
+
+        <img class="result__image" src="https://i.imgur.com/UUifsaH.png">
+        <img class="result__image" src="https://i.imgur.com/bWwwbMi.png">
+
+        <div id="detail_openevent">
+            <img class="result__image" src="https://i.imgur.com/OJ4YqhK.png">
+            <img class="result__image" src="https://i.imgur.com/ALw9Q4G.png">
+        </div>
+
+
+        <div class="result__buttonsWrapper">
+            <div class="result__buttonWrapper">
+                <button class="result__button"
+                        ng-click="onReload('http://men2b.co/get_perfume/');">구매하기</button>
+            </div>
+            <div class="result__buttonWrapper">
+                <button class="result__button"
+                        ng-click="onReload('http://men2b.co/get_perfume/');">구매하기</button>
+            </div>
+        </div>
+
+
+        <img class="result__image" src="https://i.imgur.com/Uczcnkw.png">
+
+        <div class="result__buttonsWrapper--one">
+            <button class="result__button"
+                    ng-click="onReload('http://men2b.co/service/#apply_consulting');">오프라인 상담 신청하기</button>
+        </div>
 
     </div>
 

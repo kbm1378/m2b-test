@@ -27,7 +27,7 @@ baseApp.controller("BaseCtrl", [
     "$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 
         $scope.resultInit = function() {
-            $scope.isLoadingSubmit = true;
+            $scope.isLoadingResult = true;
             name_as_id = window.location.pathname.replace("/","");
 
             $http({
@@ -36,9 +36,27 @@ baseApp.controller("BaseCtrl", [
             }).then((function(response) {
                 data = response.data
                 $scope.user = new User(data);
-                $scope.isLoadingSubmit = false;
+                $scope.isLoadingResult = false;
             }));
         }
+
+        $scope.onScrollToCommon = function(){
+            $("html, body").animate({ scrollTop: $("#detail_common").position().top });
+        }
+
+        $scope.onScrollToSpecial = function(){
+            $("html, body").animate({ scrollTop: $("#detail_special").position().top });
+        }
+
+        $scope.onScrollToOpenevent = function(){
+            $("html, body").animate({ scrollTop: $("#detail_openevent").position().top });
+        }
+
+        $scope.onReload = function(url){
+            window.location.href=url;
+        }
+
+
 
 
         // 1번만 뜬다.
