@@ -3,7 +3,9 @@
 import json
 
 from user.models import User
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def set_point_by_job(user, point_dic):
     _RATIO_JOB = 0.5
