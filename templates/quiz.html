@@ -37,9 +37,8 @@
     </nav>
     <div id="quizWrapper">
         <div class="quizQuestionList"
-             ng-hide="isLoadingSubmit"
              ng-repeat="quizQuestion in quizQuestionList"
-             ng-show="user.step == quizQuestion.id">
+             ng-show="!isLoadingSubmit && (user.step == quizQuestion.id)">
             <div class="titleWrapper">
                 <div class="titleWrapper__backWrapper"
                      ng-show="quizQuestion.id > 1"
@@ -57,7 +56,8 @@
                  id="question--{$ $index+1 $}">
                 <div class="question__cell"
                      ng-class="{'question__cell--oneline':quizQuestion.quizItemList.length<5,
-                                'question__cell--two':quizQuestion.quizItemList.length==2,
+                                'question__cell--two':quizQuestion.quizItemList.length==2&&!quizQuestion.isHorizontal,
+                                'question__cell--twoHorizontal':quizQuestion.quizItemList.length==2&&quizQuestion.isHorizontal,
                                 'question__cell--three':quizQuestion.quizItemList.length==3}"
                      ng-repeat="quizItem in quizQuestion.quizItemList"
                      ng-click="onClickQuizItem(quizQuestion, quizItem)">
@@ -76,17 +76,30 @@
             </div>
 
             <div class="question--input"
-                 ng-if="quizQuestion.type=='text'"
+                 ng-if="quizQuestion.type=='text'||quizQuestion.type=='select-age'"
                  id="question--{$ $index+1 $}">
                  <input type="text"
+                        ng-if="quizQuestion.type=='text'"
                         class="question__input"
-                        placeholder="ex) CK ONE, 존 바바토스, 앤디미온"
-                        ng-model="user.myPerfume">
-
-                <button class="question__button--submit"
-                        ng-click="onClickQuizItem(quizQuestion, null);">
-                     나에기 어울리는 향수 결과 보기
+                        placeholder="{$ quizQuestion.placeholder $}"
+                        ng-model="user[quizQuestion.id]">
+                <select class="question__selectbox"
+                        ng-if="quizQuestion.type=='select-age'"
+                        ng-model="user[quizQuestion.id]"
+                        ng-options="item.value as item.name for item in quizQuestion.selectableAge">
+                        <option value="">나이를 선택해주세요.</option>
+                </select>
+                <button class="question__button"
+                        ng-hide="quizQuestionList.length==quizQuestion.id"
+                        ng-click="onClickQuizItem(quizQuestion, null)">
+                        다음
                  </button>
+                 <button class="question__button"
+                         ng-disabled="user[quizQuestion.id].length==0"
+                         ng-if="quizQuestionList.length==quizQuestion.id"
+                         ng-click="submit()">
+                         나에게 어울리는 향수 결과 보기
+                  </button>
             </div>
 
         </div>
@@ -107,6 +120,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.8/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="/static/script/quiz.js"></script>
 </body>

@@ -34,16 +34,30 @@ def submit(request):
     request = body_to_querydict(request)
 
     user = User.objects.create()
-    user.color = int(request.POST.get('color'))
-    user.job = int(request.POST.get('job'))
-    user.hobby = int(request.POST.get('hobby'))
-    user.food = int(request.POST.get('food'))
-    user.fashion = int(request.POST.get('fashion'))
-    user.introversion = int(request.POST.get('introversion'))
-    user.heat = int(request.POST.get('heat'))
-    user.holiday = int(request.POST.get('holiday'))
+    if request.POST.get('color'):
+        user.color = int(request.POST.get('color'))
+    if request.POST.get('job'):
+        user.job = int(request.POST.get('job'))
+    if request.POST.get('hobby'):
+        user.hobby = int(request.POST.get('hobby'))
+    if request.POST.get('food'):
+        user.food = int(request.POST.get('food'))
+    if request.POST.get('fashion'):
+        user.fashion = int(request.POST.get('fashion'))
+    if request.POST.get('introversion'):
+        user.introversion = int(request.POST.get('introversion'))
+    if request.POST.get('heat'):
+        user.heat = int(request.POST.get('heat'))
+    if request.POST.get('holiday'):
+        user.holiday = int(request.POST.get('holiday'))
     if request.POST.get('my_perfume'):
         user.my_perfume = request.POST.get('my_perfume')
+    if request.POST.get('gender'):
+        user.gender = int(request.POST.get('gender'))
+    if request.POST.get('age'):
+        user.age = int(request.POST.get('age'))
+    if request.POST.get('name'):
+        user.name = request.POST.get('name')
     user.save()
 
 

@@ -1,6 +1,6 @@
 var baseApp;
 
-baseApp = angular.module("baseApp", []);
+baseApp = angular.module("baseApp", ['ngAnimate']);
 
 baseApp.config(function($interpolateProvider, $sceProvider, $httpProvider) {
   $interpolateProvider.startSymbol("{$");
@@ -16,12 +16,31 @@ baseApp.config([
 
 
 QuizQuestion = (function() {
-    function QuizQuestion(id, type, title, helper, quiz_item_list) {
+    function QuizQuestion(id, type, title, helper, additional, isHorizontal) {
         this.id = id;
         this.type = type;
         this.title = title;
         this.helper = helper;
-        this.quizItemList = quiz_item_list
+        if (type == "radio"){
+            this.quizItemList = additional
+        }else if(type == "text"){
+            this.placeholder = additional
+        }else if(type == "select-age"){
+            this.selectableAge = []
+            for (age = i = 0; i < 100; age = ++i) {
+                this.selectableAge.push({
+                    name: age + "세",
+                    value: age
+                });
+            }
+        }
+        if (isHorizontal){
+            this.isHorizontal = true
+        }else{
+            this.isHorizontal = false
+        }
+
+
     }
     return QuizQuestion;
 })();
@@ -46,12 +65,10 @@ User = (function() {
         this[6] = null;
         this[7] = null;
         this[8] = null;
-        this.myPerfume = "";
-        this.channel = null;
-        this.name = "";
-        this.age = null;
-        this.gender = 1;
-        this.comment = "";
+        this[9] = ""; //향수
+        this[10] = 1; //성별
+        this[11] = null; //나이
+        this[12] = ""; //이름
     }
     return User;
 })();
@@ -136,11 +153,11 @@ baseApp.controller("BaseCtrl", [
             '연구에 의하면 성격은 환경에 대한 자극을 반영합니다. 내향적인 사람일수록 더욱 따뜻하고, 복잡한 향을 선호합니다.',
             [
                 new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png'),
-                new QuizItem(1, '매우 외향적', 'https://i.imgur.com/Fom4Hox.png'),
-                new QuizItem(2, '외향적', 'https://i.imgur.com/5jZG8wl.png'),
-                new QuizItem(3, '보통', 'https://i.imgur.com/ulXhQ9Y.png'),
-                new QuizItem(4, '내향적', 'https://i.imgur.com/fqTKzX1.png'),
-                new QuizItem(5, '매우 내향적', 'https://i.imgur.com/I0qZZBF.png')
+                new QuizItem(1, '매우 외향적', 'https://i.imgur.com/HCDqDah.jpg'),
+                new QuizItem(2, '외향적', 'https://i.imgur.com/nhW9pp2.jpg'),
+                new QuizItem(3, '보통', 'https://i.imgur.com/IPnXqdG.jpg'),
+                new QuizItem(4, '내향적', 'https://i.imgur.com/3eEXmYR.jpg'),
+                new QuizItem(5, '매우 내향적', 'https://i.imgur.com/JxX2UNr.jpg')
             ]
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
@@ -169,15 +186,33 @@ baseApp.controller("BaseCtrl", [
             9,
             "text",
             '9. 현재 내가 가지고 있는 향수는?',
-            '현재 사용하고 있는 향수는 현재 내가 이런 향에 호감을 갖고 있구나라는 것을 알 수 있습니다. 향수를 아직 사용하고 있지 않으시면 "없음"이라고 적어주셔도 됩니다.',
-            []
+            '현재 사용하고 있는 향수는 현재 내가 이런 향에 호감을 갖고 있구나라는 것을 알 수 있습니다. 향수를 아직 사용하고 있지 않으시면 입력없이 "다음" 버튼을 눌러주세요.',
+            'ex) CK ONE, 존 바바토스, 앤디미온'
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             10,
-            "text",
-            '감사합니다.',
-            '고생하셨습니다.',
+            "radio",
+            '10. 성별',
+            '성별에 따라 당신을 표현하는 방법이 달라집니다.',
+            [
+                new QuizItem(1, '남성', 'https://i.imgur.com/XuHH2zL.jpg'),
+                new QuizItem(2, '여성', 'https://i.imgur.com/9Bz0oRn.jpg')
+            ],
+            true
+        ));
+        $scope.quizQuestionList.push(new QuizQuestion(
+            11,
+            "select-age",
+            '11. 나이',
+            '거의 다왔습니다! 연령별로 어울리는 향이 다릅니다. 숫자만 입력해주세요.',
             []
+        ));
+        $scope.quizQuestionList.push(new QuizQuestion(
+            12,
+            "text",
+            '12. 이름',
+            '마지막으로 어떤 분의 향을 찾아야할 지만 알려주세요.',
+            'ex) 김투비'
         ));
 
 
@@ -187,21 +222,23 @@ baseApp.controller("BaseCtrl", [
 
         $scope.onClickBack = function(quizQuestion) {
             $scope.user.step = quizQuestion.id - 1;
-
         }
 
         $scope.onClickQuizItem = function(quizQuestion, quizItem) {
-
-            $scope.user.step = quizQuestion.id + 1;
+            nextStep = quizQuestion.id + 1;
             if (quizItem!=null){
                 if (quizItem.id == 0){
                     return;
                 }
                 $scope.user[quizQuestion.id] = quizItem.id;
             }
-            setTimeout(function(){
-                $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
-            }, 50);
+            if ($scope.quizQuestionList[nextStep-1].type == "radio"){
+                setTimeout(function(){
+                    $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
+                }, 50);
+            }
+
+            $scope.user.step = nextStep;
         };
 
         $scope.submit = function() {
@@ -216,7 +253,10 @@ baseApp.controller("BaseCtrl", [
                 'introversion': $scope.user[6],
                 'heat': $scope.user[7],
                 'holiday': $scope.user[8],
-                'my_perfume':$scope.user.myPerfume
+                'my_perfume':$scope.user[9],
+                'gender':$scope.user[10],
+                'age':$scope.user[11],
+                'name':$scope.user[12]
             };
 
             $http({
