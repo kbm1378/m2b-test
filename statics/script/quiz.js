@@ -27,7 +27,7 @@ QuizQuestion = (function() {
             this.placeholder = additional
         }else if(type == "select-age"){
             this.selectableAge = []
-            for (age = i = 0; i < 100; age = ++i) {
+            for (age = i = 20; i < 100; age = ++i) {
                 this.selectableAge.push({
                     name: age + "세",
                     value: age
@@ -65,8 +65,8 @@ User = (function() {
         this[6] = null;
         this[7] = null;
         this[8] = null;
-        this[9] = ""; //향수
-        this[10] = 1; //성별
+        this[9] = 1; //향수
+        this[10] = ""; //성별
         this[11] = null; //나이
         this[12] = ""; //이름
     }
@@ -101,7 +101,7 @@ baseApp.controller("BaseCtrl", [
             2,
             "radio",
             '2. 다니고 있는 직장은?',
-            '수는 개인적인 아이템이 아니라 당신 주변의 사람과 공유하는 아이템입니다.',
+            '향수는 개인적인 아이템이 아니라 당신 주변의 사람과 공유하는 아이템입니다.',
             [
                 new QuizItem(1, '영업직', 'https://i.imgur.com/gbMEtRN.jpg'),
                 new QuizItem(2, '사무직', 'https://i.imgur.com/N8l6Rbw.jpg'),
@@ -138,33 +138,33 @@ baseApp.controller("BaseCtrl", [
             '5. 자주 입는 패션 스타일은?',
             '패션 스타일은 향수의 선호도를 파악하는 좋은 지표입니다.',
             [
-                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png'),
                 new QuizItem(1, '하이패션', 'https://i.imgur.com/HCDqDah.jpg'),
                 new QuizItem(2, '캐주얼', 'https://i.imgur.com/nhW9pp2.jpg'),
                 new QuizItem(3, '프레피', 'https://i.imgur.com/IPnXqdG.jpg'),
                 new QuizItem(4, '슈트', 'https://i.imgur.com/3eEXmYR.jpg'),
-                new QuizItem(5, '스트릿', 'https://i.imgur.com/JxX2UNr.jpg')
+                new QuizItem(5, '스트릿', 'https://i.imgur.com/JxX2UNr.jpg'),
+                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png')
             ]
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             6,
             "radio",
             '6. 주로 나타나는 성격은?',
-            '연구에 의하면 성격은 환경에 대한 자극을 반영합니다. 내향적인 사람일수록 더욱 따뜻하고, 복잡한 향을 선호합니다.',
+            '연구에 의하면 성격은 환경에 대한 자극을 반영합니다. 내향적인 사람일수록 따뜻하고, 복잡한 향을 선호합니다.',
             [
-                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png'),
                 new QuizItem(1, '매우 외향적', 'https://i.imgur.com/HCDqDah.jpg'),
                 new QuizItem(2, '외향적', 'https://i.imgur.com/nhW9pp2.jpg'),
                 new QuizItem(3, '보통', 'https://i.imgur.com/IPnXqdG.jpg'),
                 new QuizItem(4, '내향적', 'https://i.imgur.com/3eEXmYR.jpg'),
-                new QuizItem(5, '매우 내향적', 'https://i.imgur.com/JxX2UNr.jpg')
+                new QuizItem(5, '매우 내향적', 'https://i.imgur.com/JxX2UNr.jpg'),
+                new QuizItem(0, '', 'https://i.imgur.com/pQZnwar.png')
             ]
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             7,
             "radio",
             '7. 몸에 열이 나는 정도는?',
-            '땀에 포함된 화학성분은 향수의 밸런스와 향에 큰 영향을 미칩니다. 높은 체온을 가진 사람일수록 향수가 더욱 빨리 날아갑니다.',
+            '땀에 포함된 화학성분은 향에 큰 영향을 미칩니다. 높은 체온을 가진 사람일수록 향수가 더욱 빨리 날아갑니다.',
             [
                 new QuizItem(1, '차가운 편', 'https://i.imgur.com/TBhy68F.png'),
                 new QuizItem(2, '보통', 'https://i.imgur.com/B9Mu37U.png'),
@@ -174,7 +174,7 @@ baseApp.controller("BaseCtrl", [
         $scope.quizQuestionList.push(new QuizQuestion(
             8,
             "radio",
-            '8. 시간의 여유가 있을때 주로 무엇을?',
+            '8. 여유가 있을때 주로 무엇을?',
             '당신의 라이프를 즐기는 곳은 얼마나 붐빕니까? 향은 당신 앞에 있는 사람과 함께하는 것입니다.',
             [
                 new QuizItem(1, '클럽/파티', 'https://i.imgur.com/Fom4Hox.png'),
@@ -184,15 +184,8 @@ baseApp.controller("BaseCtrl", [
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             9,
-            "text",
-            '9. 현재 내가 가지고 있는 향수는?',
-            '현재 사용하고 있는 향수는 현재 내가 이런 향에 호감을 갖고 있구나라는 것을 알 수 있습니다. 향수를 아직 사용하고 있지 않으시면 입력없이 "다음" 버튼을 눌러주세요.',
-            'ex) CK ONE, 존 바바토스, 앤디미온'
-        ));
-        $scope.quizQuestionList.push(new QuizQuestion(
-            10,
             "radio",
-            '10. 성별',
+            '9. 성별',
             '성별에 따라 당신을 표현하는 방법이 달라집니다.',
             [
                 new QuizItem(1, '남성', 'https://i.imgur.com/XuHH2zL.jpg'),
@@ -201,17 +194,24 @@ baseApp.controller("BaseCtrl", [
             true
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
+            10,
+            "text",
+            '10. 현재 내가 가지고 있는 향수는?',
+            '사용하고 있는 향수는 내가 이런 향에 호감을 갖고 있구나라는 것을 알 수 있습니다.',
+            'ex) CK ONE, 존 바바토스, 앤디미온'
+        ));
+        $scope.quizQuestionList.push(new QuizQuestion(
             11,
             "select-age",
             '11. 나이',
-            '거의 다왔습니다! 연령별로 어울리는 향이 다릅니다. 숫자만 입력해주세요.',
+            '거의 다왔습니다! 연령별로 어울리는 향이 다릅니다.',
             []
         ));
         $scope.quizQuestionList.push(new QuizQuestion(
             12,
             "text",
             '12. 이름',
-            '마지막으로 어떤 분의 향을 찾아야할 지만 알려주세요.',
+            '마지막으로 어떤 분의 향을 찾아야할지 당신의 이름을 알려주세요. 입력하신 이름을 향수 병에 넣으실 수 있습니다.',
             'ex) 김투비'
         ));
 

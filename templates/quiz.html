@@ -90,15 +90,21 @@
                         <option value="">나이를 선택해주세요.</option>
                 </select>
                 <button class="question__button"
+                        ng-disabled="user[quizQuestion.id]==''||user[quizQuestion.id]==null"
                         ng-hide="quizQuestionList.length==quizQuestion.id"
                         ng-click="onClickQuizItem(quizQuestion, null)">
                         다음
                  </button>
+                 <button class="question__button--secondary"
+                         ng-show="quizQuestion.id==10"
+                         ng-click="onClickQuizItem(quizQuestion, null)">
+                         사용하는 향수 없음
+                  </button>
                  <button class="question__button"
                          ng-disabled="user[quizQuestion.id].length==0"
                          ng-if="quizQuestionList.length==quizQuestion.id"
                          ng-click="submit()">
-                         나에게 어울리는 향수 결과 보기
+                         나만의 향수 결과 보기
                   </button>
             </div>
 
