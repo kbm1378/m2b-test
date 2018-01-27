@@ -3,10 +3,9 @@
 import json
 
 from user.models import User
-from typing import Dict, List
 
 
-def set_point_by_job(user: User, point_dic: Dict):
+def set_point_by_job(user, point_dic):
     _RATIO_JOB = 0.5
     _JOB_SALES = 1
     _JOB_OFFICE = 2
@@ -51,7 +50,7 @@ def set_point_by_job(user: User, point_dic: Dict):
 
 
 
-def set_point_by_hobby_common(user: User, point_dic: Dict):
+def set_point_by_hobby_common(user, point_dic):
     _RATIO_HOBBY = 0.08
     _HOBBY_TOGETHER = 1
     _HOBBY_ALONE = 2
@@ -72,7 +71,7 @@ def set_point_by_hobby_common(user: User, point_dic: Dict):
 
 
 
-def set_point_by_fashion_common(user: User, point_dic: Dict):
+def set_point_by_fashion_common(user, point_dic):
     _RATIO_FASHION = 0.15
     _FASHION_HIGH = 1
     _FASHION_CASUAL = 2
@@ -124,7 +123,7 @@ def set_point_by_fashion_common(user: User, point_dic: Dict):
 
 
 
-def set_point_by_hobby_special(user: User, point_dic: Dict):
+def set_point_by_hobby_special(user, point_dic):
     _RATIO_HOBBY = 0.15
     _HOBBY_TOGETHER = 1
     _HOBBY_ALONE = 2
@@ -145,7 +144,7 @@ def set_point_by_hobby_special(user: User, point_dic: Dict):
 
 
 
-def set_point_by_fashion_special(user: User, point_dic: Dict):
+def set_point_by_fashion_special(user, point_dic):
     _RATIO_FASHION = 0.15
     _FASHION_HIGH = 1
     _FASHION_CASUAL = 2
@@ -192,7 +191,7 @@ def set_point_by_fashion_special(user: User, point_dic: Dict):
 
     return point_dic
 
-def set_point_by_holiday(user: User, point_dic: Dict):
+def set_point_by_holiday(user, point_dic):
     _RATIO_HOLIDAY = 0.5
     _HOLIDAY_PARTY = 1
     _HOLIDAY_ALONE = 2
@@ -224,7 +223,7 @@ def set_point_by_holiday(user: User, point_dic: Dict):
     return point_dic
 
 
-def select_perfume_by_point(point_dic: Dict):
+def select_perfume_by_point(point_dic):
     PERFUME_CODE_A = "A"
     PERFUME_CODE_B = "B"
     PERFUME_CODE_C = "C"
@@ -238,7 +237,7 @@ def select_perfume_by_point(point_dic: Dict):
             max_point = point
     return result_code
 
-def validate_repeat(result_common:str, result_special:str):
+def validate_repeat(result_common, result_special):
     if result_common != result_special:
         return result_special
     else:
@@ -252,7 +251,4 @@ def validate_repeat(result_common:str, result_special:str):
             return "C"
         elif result_common == "E":
             return "C"
-
-
-
-    validate_repeat(result_common, result_special)
+    return "A"
