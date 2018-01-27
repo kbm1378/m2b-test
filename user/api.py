@@ -6,6 +6,7 @@ import json
 from django.http.request import QueryDict
 from user.models import User
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def body_to_querydict(request):
     if 'application/json' in request.META['CONTENT_TYPE']:
@@ -27,7 +28,7 @@ def body_to_querydict(request):
         return request
     return request
 
-
+@csrf_exempt
 @require_http_methods(["POST"])
 def submit(request):
     data = {'result': 'fail'}
