@@ -94,3 +94,4 @@ class User(models.Model):
     age = models.IntegerField(null=True, blank=True, verbose_name='나이')
     gender = models.IntegerField(choices=_GENDER, blank=True, null=True, verbose_name='성별')
     comment = models.TextField(verbose_name='기타 문의사항')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='생성일')
