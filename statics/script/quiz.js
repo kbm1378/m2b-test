@@ -56,7 +56,7 @@ QuizItem = (function() {
 
 User = (function() {
     function User() {
-        this.step = 1;
+        this.step = 0;
         this[1] = null;
         this[2] = null;
         this[3] = null;
@@ -83,6 +83,13 @@ baseApp.controller("BaseCtrl", [
         $scope.state = {
             'isLoading': false
         };
+        $scope.quizQuestionList.push(new QuizQuestion(
+            0,
+            "intro",
+            '',
+            '',
+            []
+        ));
         $scope.quizQuestionList.push(new QuizQuestion(
             1,
             "radio",
@@ -223,9 +230,9 @@ baseApp.controller("BaseCtrl", [
 
         $scope.onClickBack = function(quizQuestion) {
              beforeStep = quizQuestion.id - 1;
-             if ($scope.quizQuestionList[beforeStep-1].type == "radio"){
+             if ($scope.quizQuestionList[beforeStep].type == "radio"){
                  setTimeout(function(){
-                     $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
+                     $("#question--" + String(beforeStep+1)).css("height", document.documentElement.clientHeight - 146);
                  }, 50);
              }
              $scope.user.step = beforeStep
@@ -239,9 +246,10 @@ baseApp.controller("BaseCtrl", [
                 }
                 $scope.user[quizQuestion.id] = quizItem.id;
             }
-            if ($scope.quizQuestionList[nextStep-1].type == "radio"){
+
+            if ($scope.quizQuestionList[nextStep].type == "radio"){
                 setTimeout(function(){
-                    $("#question--" + String(quizQuestion.id+1)).css("height", document.documentElement.clientHeight - 146);
+                    $("#question--" + String(nextStep+1)).css("height", document.documentElement.clientHeight - 146);
                 }, 50);
             }
 

@@ -154,9 +154,9 @@
                <img class="result__image"
                     ng-if="user.perfumeSpecial=='E'"
                     src="https://i.imgur.com/1uvLMRY.png">
-            <p class="result__detail">
-                {$ user.perfumeSpecialReasonText $}
-            </p>
+
+            <p class="result__detail"
+               ng-bind-html="user.perfumeSpecialReasonText">
         </div>
 
         <div class="result__buttonsWrapper--one">
@@ -165,12 +165,12 @@
         </div>
 
         <img class="result__image" src="https://i.imgur.com/UUifsaH.png">
-        <img class="result__image" src="https://i.imgur.com/DCQRsZW.png">
-        <img class="result__image" src="https://i.imgur.com/oeTJ3qc.png">
+        <img class="result__image--reviewText" src="https://i.imgur.com/DCQRsZW.png">
+        <img class="result__image--reviewWriter" src="https://i.imgur.com/oeTJ3qc.png">
 
         <div id="detail_openevent">
-            <img class="result__image--reviewText" src="https://i.imgur.com/OJ4YqhK.png">
-            <img class="result__image--reviewWriter" src="https://i.imgur.com/ALw9Q4G.png">
+            <img class="result__image" src="https://i.imgur.com/OJ4YqhK.png">
+            <img class="result__image" src="https://i.imgur.com/ALw9Q4G.png">
         </div>
 
 

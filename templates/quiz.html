@@ -41,14 +41,34 @@
              ng-show="!isLoadingSubmit && (user.step == quizQuestion.id)">
             <div class="titleWrapper">
                 <div class="titleWrapper__backWrapper"
-                     ng-show="quizQuestion.id > 1"
+                     ng-show="quizQuestion.id > 0"
                      ng-click="onClickBack(quizQuestion)">
                     <span class="oi oi-arrow-thick-left"></span>
                 </div>
-                <div class="titleWrapper__textWrapper"
-                     ng-class="{'titleWrapper__textWrapper--withoutArrow': quizQuestion.id == quizQuestionList[0].id}">
+                <div class="titleWrapper__textWrapper">
                     <h1 class="titleWrapper__textTitle">{$ quizQuestion.title $}</h1>
                     <p  class="titleWrapper__textHelper">{$ quizQuestion.helper $}</p>
+                </div>
+            </div>
+
+            <div class="question"
+                 ng-if="quizQuestion.type == 'intro'"
+                 id="question--{$ $index+1 $}">
+                <div class="question__cell--intro">
+                    <p class="question__introText">
+                        당신의 라이프스타일을 분석하여<br>
+                        자신을 가장 잘 표현할 맞춤향수를<br>
+                        조향사가 직접 만들어드립니다.<br><br>
+
+                        who do you want to be?
+                    </p>
+
+                    <button class="question__button"
+                            ng-click="onClickQuizItem(quizQuestion, null)">
+                            퀴즈 시작하기
+                     </button>
+
+
                 </div>
             </div>
 
@@ -92,7 +112,7 @@
                 </select>
                 <button class="question__button"
                         ng-disabled="user[quizQuestion.id]==''||user[quizQuestion.id]==null"
-                        ng-hide="quizQuestionList.length==quizQuestion.id"
+                        ng-hide="quizQuestionList.length==quizQuestion.id+1"
                         ng-click="onClickQuizItem(quizQuestion, null)">
                         다음
                  </button>
@@ -103,7 +123,7 @@
                   </button>
                  <button class="question__button"
                          ng-disabled="user[quizQuestion.id].length==0"
-                         ng-if="quizQuestionList.length==quizQuestion.id"
+                         ng-if="quizQuestionList.length==quizQuestion.id+1"
                          ng-click="submit()">
                          나만의 향수 결과 보기
                   </button>
@@ -119,9 +139,9 @@
                 <div></div>
             </div>
             <div id="typed-strings">
-                <p>당신의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
-                <p>당신의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
-                <p>당신의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
+                <p>{$ user[12] $}님의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
+                <p>{$ user[12] $}님의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
+                <p>{$ user[12] $}님의 라이프스타일을 분석하여 <br/> 당신을 가장 잘 표현해줄 향수를 분석하고 있습니다.</p>
             </div>
             <span id="typed"></span>
         </div>
