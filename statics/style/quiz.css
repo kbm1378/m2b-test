@@ -122,11 +122,8 @@ body{
     flex-direction: row;
     justify-content: center;
 }
-.question__cell .question__image{
-    height: 100%;
-}
 
-.question__cell--two .question__image, .question__cell--three .question__image{
+.question__cell .question__image, .question__cell--two .question__image, .question__cell--three .question__image{
     width: 100%;
     height: auto;
 }
@@ -136,7 +133,7 @@ body{
     position: absolute;
     top: 0;
     height: 100%;
-    background-color: rgba(0,0,0,0.55);
+    background-color: rgba(0,0,0,0.5);
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
