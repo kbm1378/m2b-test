@@ -20,6 +20,7 @@ from .views import *
 urlpatterns = [
     url(r'^user/', include('user.urls', namespace='user')),
     url(r'^admin/', admin.site.urls),
+    url(r'^quiz', rendering_to_quiz, name='view_quiz'),
     url(r'^$', rendering_to_quiz, name='view_quiz'),
     url(r'^', rendering_to_result, name='view_result'),
 ]
