@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'm2b',
 	'USER': 'myals93',
 	'PASSWORD': 'bluespring!2',
-	'HOST': 'm2b.cipvjqqbblly.us-east-2.rds.amazonaws.com',
+	'HOST': 'm2b-cluster-1.cluster-cipvjqqbblly.us-east-2.rds.amazonaws.com',
     	'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
